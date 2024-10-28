@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> v[i];
+    }
+
+    int sereja = 0, dima = 0;
+    int left = 0, right = n - 1;
+    bool sereja_turn = true;
+
+    while (left <= right)
+    {
+        int card;
+        if (v[left] > v[right])
+        {
+            card = v[left];
+            left++;
+        }
+        else
+        {
+            card = v[right];
+            right--;
+        }
+
+        if (sereja_turn)
+        {
+            sereja += card;
+        }
+        else
+        {
+            dima+= card;
+        }
+
+        sereja_turn = !sereja_turn;
+    }
+
+    cout << sereja << " " << dima << endl;
+    return 0;
+}
