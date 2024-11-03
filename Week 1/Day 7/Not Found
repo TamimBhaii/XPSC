@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios:: sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    string s;
+    cin >> s;
+    set <char> l(s.begin(), s.end());
+    for(char c = 'a'; c<='z'; c++)
+    {
+        if(l.find(c) == l.end())
+        {
+            cout << c << endl;
+            return 0;
+        }
+    }
+
+    cout << "None" << endl;
+    
+    return 0;
+}
