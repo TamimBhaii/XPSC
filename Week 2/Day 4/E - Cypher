@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        vector<int> v(n);
+        for (int i = 0; i < n; ++i)
+        {
+            cin >> v[i];
+        }
+
+        vector<int> d(n);
+
+        for (int i = 0; i < n; ++i)
+        {
+            int cnt;
+            string moves;
+            cin >> cnt >> moves;
+
+            int up = 0, down = 0;
+            for (char ch : moves)
+            {
+                if (ch == 'U')
+                    up++;
+                else if (ch == 'D')
+                    down++;
+            }
+
+            int net = (down - up) % 10;
+            d[i] = (v[i] + net + 10) % 10;
+        }
+
+        for (int i = 0; i < n; ++i)
+        {
+            cout << d[i] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
