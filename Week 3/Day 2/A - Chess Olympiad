@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int x, y, z;
+    cin >> x >> y >> z;
+
+    double score = x + y * 0.5;
+    double max_score = score + (4 - x - y - z);
+
+    if (max_score > 2)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
+
+    return 0;
+}
