@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n;
+    cin >> n;
+
+    deque<string> dq;
+    unordered_set<string> st;
+
+    for (int i = 0; i < n; ++i)
+    {
+        string s;
+        cin >> s;
+
+        if (st.find(s) != st.end())
+        {
+            dq.erase(remove(dq.begin(), dq.end(), s), dq.end());
+        }
+
+        dq.push_front(s);
+        st.insert(s);
+    }
+
+    string result;
+    for (const string &str : dq)
+    {
+        result += str.substr(str.size() - 2);
+    }
+
+    cout << result << '\n';
+    return 0;
+}
