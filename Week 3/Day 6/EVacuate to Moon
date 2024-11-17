@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long int t;
+    cin >> t;
+    while (t--)
+    {
+        long long int n, m, p;
+        cin >> n >> m >> p;
+
+        vector<long long int> car(n), v(m);
+        for (int i = 0; i < n; ++i)
+            cin >> car[i];
+        for (int i = 0; i < m; ++i)
+            cin >> v[i];
+
+        sort(car.rbegin(), car.rend());
+        sort(v.rbegin(), v.rend());
+
+        long long int total = 0;
+        long long int j = 0;
+
+        for (int i = 0; i < n && j < m; ++i)
+        {
+            long long int mx = v[j] * p;
+            if (mx == 0)
+                break;
+            total += min(car[i], mx);
+            j++;
+        }
+
+        cout << total << endl;
+    }
+
+    return 0;
+}
