@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int x, y;
+        cin >> x >> y;
+
+        int max1 = x / 3;
+        int max2 = y / 3;
+
+        int rem1 = x - 3 * max1;
+        int rem2 = y - 3 * max2;
+
+        int result = max(rem1, rem2);
+
+        cout << result << endl;
+    }
+
+    return 0;
+}
