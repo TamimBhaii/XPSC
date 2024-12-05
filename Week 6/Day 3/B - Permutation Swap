@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int T;
+    cin >> T;
+    while (T--)
+    {
+        long long n;
+        cin >> n;
+        vector<long long> v;
+        map<long long, long long> m, p;
+        for (long long i = 1; i <= n; i++)
+        {
+            long long z;
+            cin >> z;
+            v.push_back(z);
+            m[z] = i;
+            p[i] = z;
+        }
+        long long mx = 0;
+        for (long long i = n; i >= 1; i--)
+        {
+
+            long long idx = m[i];
+
+            if (i != idx)
+            {
+
+                long long diff = i - idx;
+
+                mx = __gcd(mx, diff);
+
+                long long t = p[i];
+
+                m[i] = i;
+                m[t] = idx;
+
+                p[idx] = t;
+                p[i] = i;
+            }
+        }
+
+        cout << mx << endl;
+    }
+    return 0;
+}
