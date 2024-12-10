@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long l, i, x, sum, p;
+    string s;
+    cin >> s;
+    l = s.size();
+    sum = 0, x = 1;
+    for (i = l - 1; i >= 0; i--)
+    {
+        if (s[i] == '7')
+            p = pow(2, x);
+        else
+            p = pow(2, x) - pow(2, x - 1);
+
+        x++;
+        sum += p;
+    }
+    cout << sum << endl;
+
+    return 0;
+}
