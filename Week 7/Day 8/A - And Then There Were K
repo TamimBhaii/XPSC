@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios:: sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    long long t;
+    cin >> t;
+    while(t--)
+    {
+        long long n;
+        cin >> n;
+        long long res = 1;
+        while(res*2<=n)
+        {
+            res = res*2;
+        }
+        cout << res-1 << endl;
+    }
+    
+    return 0;
+}
