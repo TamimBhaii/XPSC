@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long n, l, r, gcd = 0, a, b;
+    cin >> l >> r;
+    a = l, b = r;
+    n = (r - l + 1) / 2;
+    vector<pair<long long, long long>> v;
+    for (long long i = 0; i < n; i++)
+    {
+        v.push_back(make_pair(a++, b--));
+    }
+    for (long long i = 0; i < n; i++)
+    {
+        gcd = __gcd(v[i].first, v[i].second);
+        if (gcd > 1)
+        {
+            if (i + 1 < n)
+            {
+                swap(v[i].first, v[i + 1].second);
+            }
+        }
+    }
+    bool solve = false;
+    for (long long i = 0; i < n; i++)
+    {
+        gcd = __gcd(v[i].first, v[i].second);
+        if (gcd == 1)
+        {
+            solve = true;
+        }
+        else
+        {
+            solve = false;
+            break;
+        }
+    }
+    if (solve)
+    {
+        cout << "YES" << endl;
+        for (long long i = 0; i < n; i++)
+        {
+            cout << v[i].first << " " << v[i].second << endl;
+        }
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
+
+    return 0;
+}
