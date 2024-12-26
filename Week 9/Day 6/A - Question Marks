@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+void fun()
+{
+    int n;
+    cin >> n;
+    string str;
+    cin >> str;
+    vector<int> cnt(4, 0);
+
+    for (char ch : str)
+    {
+        if (ch != '?')
+        {
+            cnt[ch - 'A']++;
+        }
+    }
+
+    int result = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        result += min(cnt[i], n);
+    }
+
+    cout << result << endl;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        fun();
+    }
+
+    return 0;
+}
