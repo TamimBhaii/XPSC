@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main() 
+{
+    int n;
+    cin >> n;
+
+    vector<int> a(n);
+    int sum = 0;
+
+    for (int i = 0; i < n; i++) 
+    {
+        int p;
+        cin >> p;
+        sum += p;
+        a[i] = sum;
+    }
+    vector<int> v(sum + 1);
+    int curr = 0;
+
+    for (int i = 1; i <= sum; i++) 
+    {
+        if (i > a[curr]) 
+        {
+            curr++;
+        }
+        v[i] = curr + 1; 
+        
+    }
+
+    int m;
+    cin >> m;
+
+    for (int i = 0; i < m; i++) 
+    {
+        int idx;
+        cin >> idx;
+        cout << v[idx] << endl;
+    }
+
+    return 0;
+}
