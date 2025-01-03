@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long n, x;
+    cin >> n >> x;
+    vector<long long> a(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+    }
+
+    map<long long, int> mp;
+    mp[0] = 1;
+    long long pref = 0;
+    long long result = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        pref += a[i];
+
+        if (mp.find(pref - x) != mp.end())
+        {
+            result += mp[pref - x];
+        }
+        mp[pref]++;
+    }
+
+    cout << result << endl;
+    return 0;
+}
