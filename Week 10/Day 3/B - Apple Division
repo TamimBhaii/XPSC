@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> v[i];
+    }
+
+    long long total_weight = accumulate(v.begin(), v.end(), 0LL);
+    long long diff = LLONG_MAX;
+
+    for (int i = 0; i < (1 << n); i++)
+    {
+        long long w1 = 0;
+        for (int j = 0; j < n; j++)
+        {
+            if (i & (1 << j))
+            {
+                w1 += v[j];
+            }
+        }
+        long long w2 = total_weight - w1;
+        diff = min(diff, abs(w1 - w2));
+    }
+
+    cout << diff << endl;
+    return 0;
+}
