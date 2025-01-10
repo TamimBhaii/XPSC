@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+const long long mod = 1e9 + 7;
+
+void solve()
+{
+    long long n, a = 0, b = 0;
+    cin >> n;
+
+    for (long long i = 0; i < n; i++)
+    {
+        long long x;
+        cin >> x;
+        if (x == 1)
+        {
+            a += 2;
+        }
+        else
+        {
+            a++;
+        }
+        b += x;
+    }
+
+    if (n == 1)
+    {
+        cout << "NO" << endl;
+        return;
+    }
+
+    if (a <= b)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+
+    return 0;
+}
