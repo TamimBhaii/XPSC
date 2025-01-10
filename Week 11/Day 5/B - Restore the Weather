@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int fun = 2e5 + 10;
+int v[fun], a[fun], b[fun], res[fun];
+int main() 
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+ 
+    int t;
+    cin >> t;
+    while (t--) 
+    {
+        int n, m;
+        cin >> n >> m;
+ 
+        for (int i = 0; i < n; i++) 
+        {
+            cin >> a[i];
+        }
+        for (int i = 0; i < n; i++) 
+        {
+            cin >> b[i];
+        }
+        for (int i = 0; i < n; i++) 
+        {
+            v[i] = i;
+        }
+        sort(v, v + n, [&](const int p, const int q) 
+        {
+            return a[p] < a[q];
+        });
+        sort(b, b + n);
+        for (int i = 0; i < n; i++) 
+        {
+            res[v[i]] = b[i];
+        }
+ 
+        for (int i = 0; i < n; i++) 
+        {
+            cout << res[i] << " ";
+        }
+        cout << endl;
+    }
+ 
+    return 0;
+}
