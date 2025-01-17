@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long t;
+    cin >> t;
+    while (t--)
+    {
+        long long n;
+        cin >> n;
+        vector<long long> a;
+
+        for (long long i = n + 1;; i++)
+        {
+            bool ok = true;
+            for (long long j = 2; j * j <= i; j++)
+            {
+                if (i % j == 0)
+                {
+                    ok = false;
+                    break;
+                }
+            }
+            if (ok)
+            {
+                a.push_back(i);
+                break;
+            }
+        }
+        long long str = a.back() + n;
+        for (long long i = str;; i++)
+        {
+            bool ok = true;
+            for (long long j = 2; j * j <= i; j++)
+            {
+                if (i % j == 0)
+                {
+                    ok = false;
+                    break;
+                }
+            }
+            if (ok)
+            {
+                a.push_back(i);
+                break;
+            }
+        }
+
+        long long first = a[0] * a[1];
+        long long second = a[0] * a[0] * a[0];
+        long long mn = min(first, second);
+        cout << mn << endl;
+    }
+
+    return 0;
+}
