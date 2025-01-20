@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    long long t, n, cntZ, cntO, x;
+    cin >> t;
+    while (t--)
+    {
+        cin >> n;
+        cntZ = cntO = 0;
+        while (n--)
+        {
+            cin >> x;
+            if (x == 0)
+            {
+                cntZ++;
+            }
+            else if (x == 1)
+            {
+                cntO++;
+            }
+        }
+        long long res = (1LL << cntZ) * cntO;
+        cout << res << endl;
+    }
+    
+    return 0;
+}
