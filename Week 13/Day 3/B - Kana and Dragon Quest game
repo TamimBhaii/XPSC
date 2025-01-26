@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    long long x, n, m, curN, curM;
+    long long res, ok;
+
+    cin >> t;
+    while (t--)
+    {
+        res = ok = 0;
+        int tgt = 0;
+        cin >> x >> n >> m;
+
+        curN = n;
+        curM = m;
+        res = ok = x;
+
+        while (n-- && res > 0)
+        {
+            res = (res / 2) + 10;
+            if (res <= 0)
+            {
+                tgt = 1;
+                break;
+            }
+        }
+
+        while (m-- && res > 0)
+        {
+            res -= 10;
+            if (res <= 0)
+            {
+                tgt = 1;
+                break;
+            }
+        }
+
+        while (curM-- && ok > 0)
+        {
+            ok -= 10;
+            if (ok <= 0)
+            {
+                tgt = 1;
+                break;
+            }
+        }
+
+        while (curN-- && ok > 0)
+        {
+            ok = (ok / 2) + 10;
+            if (ok <= 0)
+            {
+                tgt = 1;
+                break;
+            }
+        }
+
+        if (tgt == 1)
+        {
+            cout << "YES" << endl;
+        }
+        else
+        {
+            cout << "NO" << endl;
+        }
+    }
+
+    return 0;
+}
