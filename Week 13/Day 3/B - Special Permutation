@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long t;
+    cin >> t;
+    while (t--)
+    {
+        long long n, a, b;
+        cin >> n >> a >> b;
+        vector<long long> ar(n, 0);
+        bool flag = true;
+        ar[0] = a;
+        ar[n / 2] = b;
+        long long idx = 1;
+
+        for (long long i = n; i >= 1; i--)
+        {
+            if (ar[idx] == a || ar[idx] == b)
+            {
+                idx++;
+                i++;
+            }
+            else if (idx < n / 2 && i > a && i != b)
+            {
+                ar[idx] = i;
+                idx++;
+            }
+            else if (idx > n / 2 && i < b && i != a)
+            {
+                ar[idx] = i;
+                idx++;
+            }
+        }
+
+        for (long long i = 0; i < n; i++)
+        {
+            if (ar[i] == 0)
+            {
+                flag = false;
+                break;
+            }
+        }
+
+        if (flag)
+        {
+            for (long long i = 0; i < n; i++)
+            {
+                cout << ar[i] << " ";
+            }
+        }
+        else
+        {
+            cout << "-1";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
