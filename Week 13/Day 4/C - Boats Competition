@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void done()
+{
+    int n;
+    cin >> n;
+    map<int, int> mp;
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        mp[x]++;
+    }
+
+    int mx = 0;
+    for (int i = 1; i <= (2 * n); i++)
+    {
+        int ok = 0;
+        for (auto j : mp)
+        {
+            int temp = i - j.first;
+            if (temp >= 1 && mp.count(temp))
+            {
+                ok += min(j.second, mp[temp]);
+            }
+        }
+        ok /= 2;
+        mx = max(mx, ok);
+    }
+
+    cout << mx << endl;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        done();
+    }
+
+    return 0;
+}
