@@ -1,0 +1,105 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool prime(int n)
+{
+    if (n < 2)
+    {
+        return false;
+    }
+    if (n <= 3)
+    {
+        return true;
+    }
+    if (n % 2 == 0)
+    {
+        return false;
+    }
+    for (int i = 3; i * i <= n; i += 2)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long t;
+    cin >> t;
+    while (t--)
+    {
+        long long n;
+        cin >> n;
+        long long ar[n + 2];
+        map<long long, long long> mp;
+        long long sum = 0;
+        vector<long long> ok;
+
+        for (long long i = 0; i < n; i++)
+        {
+            cin >> ar[i];
+            sum += ar[i];
+            mp[ar[i]]++;
+            ok.push_back(ar[i]);
+        }
+
+        vector<long long> v;
+        priority_queue<long long> pq;
+        pq.push(sum);
+
+        for (long long i = 1; i < n; i++)
+        {
+            while (!pq.empty() && mp[pq.top()] != 0)
+            {
+                v.push_back(pq.top());
+                mp[pq.top()]--;
+                pq.pop();
+            }
+            if (!pq.empty())
+            {
+                long long x = pq.top();
+                pq.pop();
+                long long a, b;
+                if (x % 2 == 0)
+                {
+                    a = x / 2;
+                    b = x / 2;
+                }
+                else
+                {
+                    a = x / 2;
+                    b = x / 2 + 1;
+                }
+                pq.push(a);
+                pq.push(b);
+            }
+        }
+
+        while (!pq.empty() && mp[pq.top()] != 0)
+        {
+            v.push_back(pq.top());
+            mp[pq.top()]--;
+            pq.pop();
+        }
+
+        sort(v.begin(), v.end());
+        sort(ok.begin(), ok.end());
+
+        if (v == ok)
+        {
+            cout << "YES" << endl;
+        }
+        else
+        {
+            cout << "NO" << endl;
+        }
+    }
+
+    return 0;
+}
