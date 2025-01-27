@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        long long n;
+        cin >> n;
+        long long sum = 0;
+        vector<long long> a(n + 1);
+
+        for (int i = 1; i <= n; i++)
+        {
+            cin >> a[i];
+            sum += a[i];
+        }
+
+        long long temp = 2 * sum / n;
+        map<long long, long long> cnt;
+        long long ok = 0;
+
+        if ((sum - temp) * n != sum * (n - 2))
+        {
+            cout << 0 << endl;
+            continue;
+        }
+
+        for (int i = 1; i <= n; i++)
+        {
+            ok += cnt[temp - a[i]];
+            cnt[a[i]]++;
+        }
+
+        cout << ok << endl;
+    }
+
+    return 0;
+}
