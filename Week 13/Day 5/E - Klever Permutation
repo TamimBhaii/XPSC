@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+void solve()
+{
+    long long n, k;
+    cin >> n >> k;
+ 
+    long long mx = n, mn = 1;
+    vector<long long> p(n);
+ 
+    for (int i = 1; i <= k; ++i)
+    {
+        for (int j = i; j <= n; j += k)
+        {
+            if (i % 2 == 1)
+            {
+                p[j - 1] = mn++;
+            }
+            else
+            {
+                p[j - 1] = mx--;
+            }
+        }
+    }
+ 
+    for (auto val : p)
+    {
+        cout << val << " ";
+    }
+    cout << endl;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+ 
+    long long t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+ 
+    return 0;
+}
