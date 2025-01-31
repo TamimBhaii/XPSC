@@ -1,0 +1,26 @@
+#include <bits./stdc++.h>
+using namespace std;
+int main()
+{
+    long long n;
+    cin >> n;
+    long long mx = -1, x, ok = 0;
+
+    for (long long i = 0; i < n; i++)
+    {
+        cin >> x;
+        if (x > mx + 1)
+        {
+            cout << i + 1;
+            ok = 1;
+            break;
+        }
+
+        mx = max(mx, x);
+    }
+
+    if (ok == 0)
+    {
+        cout << -1;
+    }
+}
