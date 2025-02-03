@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+long long cnt1(vector<pair<int, int>> &a, int l, int mid, int r)
+{
+    vector<pair<int, int>> temp(r - l + 1);
+    int i = l, j = mid + 1, k = 0;
+    long long cntFun = 0;
+
+    while (i <= mid && j <= r)
+    {
+        if (a[i].second <= a[j].second)
+        {
+            temp[k++] = a[i++];
+        }
+        else
+        {
+            temp[k++] = a[j++];
+            cntFun += (mid - i + 1);
+        }
+    }
+
+    while (i <= mid)
+    {
+        temp[k++] = a[i++];
+    }
+
+    while (j <= r)
+    {
+        temp[k++] = a[j++];
+    }
+
+    for (i = l; i <= r; i++)
+    {
+        a[i] = temp[i - l];
+    }
+
+    return cntFun;
+}
+
+long long cnt(vector<pair<int, int>> &a, int l, int r)
+{
+    long long cntFun = 0;
+    if (l < r)
+    {
+        int mid = l + (r - l) / 2;
+        cntFun += cnt(a, l, mid);
+        cntFun += cnt(a, mid + 1, r);
+        cntFun += cnt1(a, l, mid, r);
+    }
+    return cntFun;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        vector<pair<int, int>> v(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin >> v[i].first >> v[i].second;
+        }
+        sort(v.begin(), v.end());
+        long long res = cnt(v, 0, n - 1);
+
+        cout << res << endl;
+    }
+
+    return 0;
+}
