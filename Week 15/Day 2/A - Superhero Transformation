@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    string str1, str2;
+    cin >> str1 >> str2;
+
+    if (str1.length() != str2.length())
+    {
+        cout << "NO" << endl;
+        return 0;
+    }
+
+    for (int i = 0; i < str1.length(); i++)
+    {
+        bool vowel1 = (str1[i] == 'a' || str1[i] == 'e' || str1[i] == 'i' || str1[i] == 'o' || str1[i] == 'u');
+        bool vowel2 = (str2[i] == 'a' || str2[i] == 'e' || str2[i] == 'i' || str2[i] == 'o' || str2[i] == 'u');
+
+        if (vowel1 != vowel2)
+        {
+            cout << "NO" << endl;
+            return 0;
+        }
+    }
+
+    cout << "YES" << endl;
+    return 0;
+}
