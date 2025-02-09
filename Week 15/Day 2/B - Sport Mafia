@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long n, k;
+    cin >> n >> k;
+
+    long long x = n + k, cnt = 0;
+    while (x != (cnt * (cnt + 1)) / 2)
+    {
+        cnt++;
+        x--;
+    }
+
+    cout << n - cnt << endl;
+    return 0;
+}
