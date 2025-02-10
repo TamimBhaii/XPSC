@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n, c, q;
+        cin >> n >> c >> q;
+
+        string s;
+        cin >> s;
+        vector<pair<long long, long long>> v1(c), v2(c);
+        long long len = n;
+
+        for (int i = 0; i < c; i++)
+        {
+            long long l, r;
+            cin >> l >> r;
+            v1[i] = {l, r};
+            v2[i] = {len + 1, len + (r - l + 1)};
+            len = v2[i].second;
+        }
+
+        while (q--)
+        {
+            long long k;
+            cin >> k;
+            if (k <= n)
+            {
+                cout << s[k - 1] << endl;
+                continue;
+            }
+            for (int i = c - 1; i >= 0; i--)
+            {
+                if (k >= v2[i].first && k <= v2[i].second)
+                {
+                    k = (v1[i].first) + (k - v2[i].first);
+                }
+            }
+            cout << s[k - 1] << endl;
+        }
+    }
+
+    return 0;
+}
