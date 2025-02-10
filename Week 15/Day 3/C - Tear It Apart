@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long t;
+    cin >> t;
+    while (t--)
+    {
+        string s;
+        cin >> s;
+        long long n = (long long)s.size(), c = 0, mn = INT_MAX, mx;
+
+        for (char i = 'a'; i <= 'z'; i++)
+        {
+            c = 0, mx = 0;
+            for (long long j = 0; j < n; j++)
+            {
+                if (s[j] != i)
+                {
+                    c++;
+                    if (c > mx)
+                    {
+                        mx = c;
+                    }
+                }
+                else
+                {
+                    c = 0;
+                }
+            }
+            if (mx < mn)
+            {
+                mn = mx;
+            }
+        }
+
+        if (mn == 0)
+        {
+            cout << 0 << endl;
+        }
+        else
+        {
+            c = 0;
+            while (mn != 1)
+            {
+                mn /= 2;
+                c++;
+            }
+            int res = c + mn;
+            cout << res << endl;
+        }
+    }
+
+    return 0;
+}
