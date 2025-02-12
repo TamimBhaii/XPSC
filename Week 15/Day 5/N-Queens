@@ -1,0 +1,32 @@
+class Solution {
+public:
+    void solve_n_queens(int row, int n, vector<string> &board, vector<vector<string>> &solutions, vector<int> &cols, vector<int> &diag1, vector<int> &diag2) 
+    {
+        if (row == n) 
+        {
+            solutions.push_back(board);
+            return;
+        }
+
+        for (int col = 0; col < n; col++) 
+        {
+            if (!cols[col] && !diag1[row - col + n - 1] && !diag2[row + col]) 
+            {
+                board[row][col] = 'Q';
+                cols[col] = diag1[row - col + n - 1] = diag2[row + col] = 1;
+                solve_n_queens(row + 1, n, board, solutions, cols, diag1, diag2);
+                board[row][col] = '.';
+                cols[col] = diag1[row - col + n - 1] = diag2[row + col] = 0;
+            }
+        }
+    }
+
+    vector<vector<string>> solveNQueens(int n) 
+    {
+        vector<vector<string>> solutions;
+        vector<string> board(n, string(n, '.'));
+        vector<int> cols(n, 0), diag1(2 * n - 1, 0), diag2(2 * n - 1, 0);
+        solve_n_queens(0, n, board, solutions, cols, diag1, diag2);
+        return solutions;
+    }
+};
