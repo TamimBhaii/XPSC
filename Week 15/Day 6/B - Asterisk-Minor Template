@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long long t;
+    cin >> t;
+    while (t--)
+    {
+        string str1, str2, f = "", s = "";
+        long long n, m;
+        cin >> str1 >> str2;
+        n = (long long)str1.size();
+        m = (long long)str2.size();
+
+        for (long long i = 0; i < (n - 1); i++)
+        {
+            for (long long j = 0; j < (m - 1); j++)
+            {
+                if (str1[i] == str2[j] and str1[i + 1] == str2[j + 1])
+                {
+                    f = str1[i];
+                    s = str1[i + 1];
+                    break;
+                }
+            }
+            if (f != "")
+            {
+                break;
+            }
+        }
+        if (f != "")
+        {
+            cout << "YES" << endl;
+            cout << "*" << f << s << "*" << endl;
+        }
+        else
+        {
+            if (str1[0] == str2[0])
+            {
+                cout << "YES" << endl;
+                cout << str1[0] << "*" << endl;
+            }
+            else if (str1[n - 1] == str2[m - 1])
+            {
+                cout << "YES" << endl;
+                cout << "*" << str1[n - 1] << endl;
+            }
+            else
+            {
+                cout << "NO" << endl;
+            }
+        }
+    }
+
+    return 0;
+}
