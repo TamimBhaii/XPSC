@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int fun(int n, int m, int r, int c, vector<vector<int>> &mat, vector<vector<int>> &v)
+{
+    if (r >= 0 && r < n && c >= 0 && c < m)
+    {
+        return (mat[r][c] && !v[r][c]);
+    }
+    return 0;
+}
+ 
+int trav(int n, int m, int r, int c, vector<vector<int>> &mat, vector<vector<int>> &v)
+{
+    static int ro[4] = {-1, 1, 0, 0};
+    static int co[4] = {0, 0, -1, 1};
+    int sum = 0;
+    for (int k = 0; k < 4; k++)
+    {
+        if (fun(n, m, r + ro[k], c + co[k], mat, v))
+        {
+            v[r + ro[k]][c + co[k]] = 1;
+            sum += mat[r + ro[k]][c + co[k]] + trav(n, m, r + ro[k], c + co[k], mat, v);
+        }
+    }
+    return sum;
+}
+ 
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+ 
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n, m, p, mx = 0;
+        cin >> n >> m;
+        vector<vector<int>> mat(n, vector<int>(m));
+        vector<vector<int>> v(n, vector<int>(m, 0));
+ 
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                cin >> mat[i][j];
+            }
+        }
+ 
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (mat[i][j] != 0 && !v[i][j])
+                {
+                    v[i][j] = 1;
+                    int value = trav(n, m, i, j, mat, v) + mat[i][j];
+                    mx = max(mx, value);
+                }
+            }
+        }
+ 
+        cout << mx << endl;
+    }
+ 
+    return 0;
+}
