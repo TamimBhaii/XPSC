@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void solve()
+{
+    long long n, x;
+    cin >> n >> x;
+    long long ans = 0, a, p = 0;
+ 
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a;
+        ans = max(ans, a - p);
+        p = a;
+    }
+ 
+    ans = max(ans, 2 * (x - p));
+    cout << ans << endl;
+}
+ 
+int main()
+{
+    long long t;
+    cin >> t;
+ 
+    while (t--)
+    {
+        solve();
+    }
+ 
+    return 0;
+}
