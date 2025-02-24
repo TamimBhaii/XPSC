@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t = 1;
+    cin >> t;
+    while (t--)
+    {
+        int n, m;
+        cin >> n >> m;
+
+        int a[n];
+        a[0] = m;
+        for (int i = 1; i < n; i++)
+            cin >> a[i];
+
+        int b[n];
+        for (int i = 0; i < n; i++)
+            cin >> b[i];
+
+        sort(a, a + n);
+        sort(b, b + n);
+
+        int j = 0;
+        int i = 0;
+        int ans = 0;
+
+        while (i < n)
+        {
+
+            if (a[j] < b[i])
+            {
+                i++;
+                j++;
+            }
+            else
+            {
+                while (i < n && a[j] >= b[i])
+                {
+                    ans++;
+                    i++;
+                }
+                j++;
+                i++;
+            }
+        }
+
+        cout << ans << endl;
+    }
+    return 0;
+}
