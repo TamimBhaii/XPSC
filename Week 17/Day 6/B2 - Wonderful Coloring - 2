@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+
+    while (t--)
+    {
+        int n, k;
+        cin >> n >> k;
+        int a[n + 1];
+        vector<int> v[n + 1];
+        vector<int> tmp;
+        int ans[n + 1];
+
+        for (int i = 1; i <= n; i++)
+        {
+            ans[i] = 0;
+            cin >> a[i];
+            v[a[i]].push_back(i);
+        }
+
+        for (int i = 1; i <= n; i++)
+        {
+            if (v[i].size() >= k)
+            {
+                for (int j = 0; j < k; j++)
+                {
+                    ans[v[i][j]] = (j + 1);
+                }
+            }
+            else
+            {
+                if (v[i].size() >= 1)
+                    for (int j = 0; j < v[i].size(); j++)
+                    {
+                        tmp.push_back(v[i][j]);
+                    }
+            }
+        }
+
+        int cnt = tmp.size() / k;
+        int p = 1, d = 0;
+
+        for (int i = 0; i < tmp.size(); i++)
+        {
+            if (d == cnt)
+            {
+                break;
+            }
+            ans[tmp[i]] = p;
+            if (p == k)
+            {
+                d++;
+            }
+            p++;
+            if (p == (k + 1))
+            {
+                p = 1;
+            }
+        }
+
+        for (int i = 1; i <= n; i++)
+        {
+            cout << ans[i] << " ";
+        }
+        cout << endl;
+        tmp.clear();
+        for (int i = 0; i <= n; i++)
+        {
+            v[i].clear();
+        }
+    }
+
+    return 0;
+}
