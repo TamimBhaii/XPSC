@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        long long n, m;
+        cin >> n >> m;
+        long long total = n * (n + 1) / 2;
+        long long f = n - m;
+        long long ttl = f * (f + 1) / 2;
+        long long sum = total - ttl;
+
+        if (sum % 2 == 0)
+        {
+            cout << "YES" << endl;
+        }
+        else
+        {
+            cout << "NO" << endl;
+        }
+    }
+    return 0;
+}
