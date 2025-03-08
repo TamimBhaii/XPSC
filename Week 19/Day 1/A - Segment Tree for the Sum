@@ -1,0 +1,107 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+class segment_tree
+{
+public:
+    vector<long long> tree;
+ 
+    segment_tree(int n)
+    {
+        tree.assign(n * 4, 0);
+    }
+ 
+    void up(int node, int i, int st, int sp, int val)
+    {
+        if (sp < i || st > i)
+        {
+            return;
+        }
+        if (st == sp)
+        {
+            tree[node] = val;
+        }
+        else
+        {
+            int mid = st + (sp - st) / 2;
+            int lft = node * 2;
+            int rght = lft + 1;
+            up(lft, i, st, mid, val);
+            up(rght, i, mid + 1, sp, val);
+            tree[node] = tree[lft] + tree[rght];
+        }
+    }
+ 
+    long long sol(int node, int l, int r, int st, int sp)
+    {
+        if (st > r || sp < l)
+        {
+            return 0;
+        }
+        if (st >= l && sp <= r)
+        {
+            return tree[node];
+        }
+        int mid = st + (sp - st) / 2;
+        int lft = node * 2;
+        int rght = lft + 1;
+        long long q1 = sol(lft, l, r, st, mid);
+        long long q2 = sol(rght, l, r, mid + 1, sp);
+        return q1 + q2;
+    }
+ 
+    void fun(const vector<int> &v, int node, int st, int sp)
+    {
+        if (st == sp)
+        {
+            tree[node] = v[st];
+        }
+        else
+        {
+            int mid = st + (sp - st) / 2;
+            int lft = node * 2;
+            int rght = lft + 1;
+            fun(v, lft, st, mid);
+            fun(v, rght, mid + 1, sp);
+            tree[node] = tree[lft] + tree[rght];
+        }
+    }
+};
+ 
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+ 
+    int n, m;
+    cin >> n >> m;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+    {
+        cin >> v[i];
+    }
+ 
+    segment_tree tree(n);
+    tree.fun(v, 1, 0, n - 1);
+ 
+    while (m--)
+    {
+        int x;
+        cin >> x;
+        if (x == 1)
+        {
+            int i, val;
+            cin >> i >> val;
+            tree.up(1, i, 0, n - 1, val);
+        }
+        else
+        {
+            int l, r;
+            cin >> l >> r;
+            r--;
+            cout << tree.sol(1, l, r, 0, n - 1) << endl;
+        }
+    }
+ 
+    return 0;
+}
