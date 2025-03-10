@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+const long long inf = 1e9;
+struct idx
+{
+    int l, r;
+};
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+ 
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n, m;
+        cin >> n >> m;
+        vector<idx> seg(m + 5);
+        for (int i = 1; i <= m; i++)
+        {
+            cin >> seg[i].l >> seg[i].r;
+        }
+        int q;
+        cin >> q;
+        vector<int> cng(q + 5);
+        for (int i = 1; i <= q; i++)
+        {
+            cin >> cng[i];
+        }
+        int ans = inf;
+        int low = 1, high = q;
+        while (low <= high)
+        {
+            int mid = (low + high) / 2;
+            vector<int> pref(n + 5);
+            for (int i = 1; i <= mid; i++)
+            {
+                pref[cng[i]] = 1;
+            }
+            for (int i = 1; i <= n; i++)
+            {
+                pref[i] += pref[i - 1];
+            }
+            int tans = inf;
+            for (int i = 1; i <= m; i++)
+            {
+                if (pref[seg[i].r] - pref[seg[i].l - 1] >= (seg[i].r - seg[i].l + 1) / 2 + 1)
+                {
+                    tans = min(tans, mid);
+                }
+            }
+            if (tans != inf)
+            {
+                ans = min(ans, tans);
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
+        if (ans == inf)
+        {
+            cout << -1 << endl;
+        }
+        else
+        {
+            cout << ans << endl;
+        }
+    }
+ 
+    return 0;
+}
