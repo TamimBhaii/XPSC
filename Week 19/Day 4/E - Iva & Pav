@@ -1,0 +1,112 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool okay(long long l, long long r, long long mid, vector<vector<long long>> &pref)
+{
+
+    long long curr = 0;
+    for (long long i = 0; i < 32; i++)
+    {
+        long long ss = pref[mid][i];
+        if (l != 0)
+        {
+            ss -= pref[l - 1][i];
+        }
+        if (ss == mid - l + 1)
+        {
+            curr += (1 << i);
+        }
+    }
+
+    return curr >= r;
+}
+
+long long BSearch(long long l, long long r, long long arr[], long long n, vector<vector<long long>> &pref)
+{
+
+    long long low = l;
+    long long high = n - 1;
+    long long ans = -1;
+
+    while (low <= high)
+    {
+
+        long long mid = low + (high - low) / 2;
+        if (okay(l, r, mid, pref))
+        {
+            ans = mid;
+            low = mid + 1;
+        }
+        else
+            high = mid - 1;
+    }
+    return ans == -1 ? ans : ans + 1;
+}
+
+void solve()
+{
+    long long n;
+    cin >> n;
+
+    long long arr[n];
+    for (long long i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+
+    long long q;
+    cin >> q;
+
+    vector<vector<long long>> pref(n, vector<long long>(32, 0));
+    for (long long i = 0; i < n; i++)
+    {
+
+        long long v = arr[i];
+        long long p = 0;
+        while (v > 0)
+        {
+            if (v % 2 != 0)
+            {
+                pref[i][p] += 1;
+            }
+            v /= 2;
+            p++;
+        }
+
+        if (i != 0)
+        {
+            for (long long j = 0; j < 32; j++)
+            {
+                pref[i][j] += pref[i - 1][j];
+            }
+        }
+    }
+
+    for (long long i = 0; i < q; i++)
+    {
+
+        long long l, r;
+        cin >> l >> r;
+        --l;
+        long long x = BSearch(l, r, arr, n, pref);
+
+        cout << x << " ";
+    }
+
+    cout << endl;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+
+    return 0;
+}
