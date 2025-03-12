@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 8;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long t;
+    cin >> t;
+    while (t--)
+    {
+
+        vector<string> v(N);
+        for (long long p = 0; p < N; p++)
+        {
+            cin >> v[p];
+        }
+        char ans('.');
+
+        for (long long i = 0; ans == '.' && i < N; i++)
+        {
+            bool test(true);
+            for (long long j = 0; test && j < N; j++)
+            {
+                if (v[i][j] != 'R')
+                {
+                    test = false;
+                }
+            }
+            if (test)
+            {
+                ans = 'R';
+            }
+        }
+
+        for (long long j = 0; ans == '.' && j < N; j++)
+        {
+            bool test(true);
+            for (long long i = 0; test && i < N; i++)
+            {
+                if (v[i][j] != 'B')
+                {
+                    test = false;
+                }
+            }
+            if (test)
+            {
+                ans = 'B';
+            }
+        }
+
+        cout << ans << endl;
+    }
+
+    return 0;
+}
