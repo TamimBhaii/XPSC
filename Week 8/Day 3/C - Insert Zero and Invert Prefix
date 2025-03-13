@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+void solve()
+{
+    long long n;
+    cin >> n;
+ 
+    vector<char> arr(n);
+    for (long long i = 0; i < n; i++)
+    {
+        cin >> arr[i];
+    }
+    if (arr[n - 1] == '1')
+    {
+        cout << "NO" << endl;
+        return;
+    }
+    vector<long long> ans;
+    long long j = n - 1;
+    while (j >= 0)
+    {
+        long long onesCount = 0;
+        long long zeroCount = 0;
+        long long tempj = j;
+        while (tempj >= 0 && arr[tempj] == '0')
+        {
+            zeroCount++;
+            tempj--;
+        }
+        while (tempj >= 0 && arr[tempj] == '1')
+        {
+            onesCount++;
+            tempj--;
+        }
+ 
+        for (long long k = 0; k < zeroCount - 1; k++)
+        {
+            ans.push_back(0);
+        }
+        for (long long k = 0; k < onesCount; k++)
+        {
+            ans.push_back(0);
+        }
+        ans.push_back(onesCount);
+        j = tempj;
+    }
+    cout << "YES" << endl;
+    for (auto el : ans)
+    {
+        cout << el << " ";
+    }
+    cout << endl;
+}
+ 
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+ 
+    long long t;
+    cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+ 
+    return 0;
+}
