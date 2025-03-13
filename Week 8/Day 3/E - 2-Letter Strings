@@ -1,0 +1,69 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        long long n, i, j;
+        cin >> n;
+        string a[n];
+        for (i = 0; i < n; i++)
+            cin >> a[i];
+
+        long long idx[130][130] = {0}, idx1[130][130] = {0};
+        long long inf[130] = {0}, inl[130] = {0};
+        for (i = 0; i < n; i++)
+        {
+            idx[a[i][0]][a[i][1]]++;
+            inf[a[i][0]]++;
+            idx1[a[i][1]][a[i][0]]++;
+            inl[a[i][1]]++;
+        }
+        long long ans = 0, x, y;
+        for (i = 90; i < 120; i++)
+        {
+            if (inf[i] > 1)
+            {
+                x = inf[i];
+                for (j = 90; j < 120; j++)
+                {
+                    if (idx[i][j] > 0)
+                    {
+                        y = idx[i][j];
+                        ans = ans + y * (x - y);
+                        x -= y;
+                    }
+                    if (x < 2)
+                        break;
+                }
+            }
+        }
+        for (i = 90; i < 120; i++)
+        {
+            if (inl[i] > 1)
+            {
+                x = inl[i];
+                for (j = 90; j < 120; j++)
+                {
+                    if (idx1[i][j] > 0)
+                    {
+                        y = idx1[i][j];
+                        ans = ans + y * (x - y);
+                        x -= y;
+                    }
+                    if (x < 2)
+                        break;
+                }
+            }
+        }
+        cout << ans;
+        cout << endl;
+    }
+
+    return 0;
+}
