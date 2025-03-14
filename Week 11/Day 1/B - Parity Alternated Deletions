@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+ 
+    int n;
+    while (cin >> n)
+    {
+        vector<int> e, o;
+        for (int i = 0; i < n; i++)
+        {
+            int k;
+            cin >> k;
+            if (k & 1)
+            {
+                o.push_back(k);
+            }
+            else
+            {
+                e.push_back(k);
+            }
+        }
+        sort(o.begin(), o.end());
+        sort(e.begin(), e.end());
+ 
+        int l1 = e.size(), l2 = o.size();
+        if (l1 == l2 || abs(l1 - l2) == 1)
+        {
+            cout << 0;
+        }
+        else
+        {
+            int s = 0;
+            if (l1 > l2)
+            {
+                for (int i = l1 - l2 - 2; i >= 0; i--)
+                {
+                    s += e[i];
+                }
+            }
+            else
+            {
+                for (int i = l2 - l1 - 2; i >= 0; i--)
+                {
+                    s += o[i];
+                }
+            }
+            cout << s;
+        }
+        cout << endl;
+    }
+    return 0;
+}
