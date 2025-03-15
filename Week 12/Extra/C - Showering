@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    long t;
+    cin >> t;
+    while(t--)
+    {
+        long n, s, m;
+        cin >> n >> s >> m;
+        
+        long p = 0, f = 0;
+        for(long i = 0; i < n; i++)
+        {
+            long l, r;
+            cin >> l >> r;
+            if(p + s <= l)
+            {
+                f = 1;
+            }
+            p = r;
+        }
+
+        if(p + s <= m)
+        {
+            f = 1;
+        }
+
+        cout << (f ? "YES" : "NO") << endl;
+    }
+
+    return 0;
+}
