@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    string v = "aeiou";
+    long t;
+    cin >> t;
+    while(t--)
+    {
+        long n, vseq, rem;
+        string res = "";
+        cin >> n;
+        vseq = n / 5;
+        rem = n % 5;
+        
+        while(vseq--)
+        {
+            res += v;
+        }
+        
+        for(long i = 0; i < rem; i++)
+        {
+            res += v[i];
+        }
+        
+        sort(res.begin(), res.end());
+        cout << res << endl;
+    }
+
+    return 0;
+}
