@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        string s;
+        cin >> s;
+        string ans = "YES";
+        int length = s.size();
+
+        if (sqrt(length) != int(sqrt(length)))
+        {
+            ans = "NO";
+        }
+        else
+        {
+            int r = int(sqrt(length));
+            for (int i = 0; i < n; i += r)
+            {
+                string line = s.substr(i, r);
+                if (i == 0 || i == n - r)
+                {
+                    if (line != string(r, '1'))
+                    {
+                        ans = "NO";
+                        break;
+                    }
+                }
+                else
+                {
+                    if (line != "1" + string(r - 2, '0') + "1")
+                    {
+                        ans = "NO";
+                        break;
+                    }
+                }
+            }
+        }
+        cout << ans << endl;
+    }
+    return 0;
+}
