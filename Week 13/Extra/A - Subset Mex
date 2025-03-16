@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long int;
+
+class tc
+{
+    int n;
+    map<int, int> rem;
+
+public:
+    void solve()
+    {
+        cin >> n;
+        vector<int> v, a, b;
+        for (int i = 0; i < n; i++)
+        {
+            int x;
+            cin >> x;
+            v.push_back(x);
+            if (rem[x] == 0)
+            {
+                a.push_back(x);
+            }
+            else if (rem[x] == 1)
+            {
+                b.push_back(x);
+            }
+            rem[x]++;
+        }
+        int mxa = mex(a), mxb = mex(b);
+        cout << mxa + mxb << endl;
+    }
+
+    int mex(vector<int> &t)
+    {
+        sort(t.begin(), t.end());
+        int cnt = 0;
+        for (int i = 0; i < (int)t.size(); i++)
+        {
+            if (cnt == t[i])
+            {
+                cnt++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return cnt;
+    }
+};
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t = 1;
+    cin >> t;
+    for (int i = 1; i <= t; i++)
+    {
+        tc t;
+        t.solve();
+    }
+    return 0;
+}
