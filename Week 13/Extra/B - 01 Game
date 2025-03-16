@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
+    cin >> t;
+    while(t--){
+        int o = 0, z = 0;
+        string s;
+        cin >> s;
+        int n = s.length();
+        for(int i = 0; i < n; i++){
+            if(s[i] == '1'){
+                o++;
+            }
+            else{
+                z++;
+            }
+        }
+        int turn = min(z, o);
+        if(turn == 0 || turn % 2 == 0){
+            cout << "NET" << endl;
+        }
+        else{
+            cout << "DA" << endl;
+        }
+    }
+    return 0;
+}
