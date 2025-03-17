@@ -1,0 +1,103 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+ll fun(ll a, ll b) {
+    if(b == 0) {
+        return 1;
+    }
+    
+    if(b == 1) {
+        return a;
+    }
+    
+    ll ret = fun(a, b / 2);
+    ret *= ret;
+    
+    if(b % 2 == 1) {
+        ret *= a;
+    }
+    
+    return ret;
+}
+
+bool trueOrfalse(ll num, vector<ll>& v, vector<ll>& v2) {
+    ll index = 0, i = 0;
+    
+    while(index < v2.size()) {
+        if(abs(v[i] - v2[index]) <= num) {
+            i++;
+        } else {
+            index++;
+        }
+
+        if(i == v.size()) {
+            return true;
+        }
+    }
+
+    return i == v.size();
+}
+
+void solve() {
+    ll n, b;
+    cin >> n >> b;
+
+    vector<ll> v(n);
+    
+    for(int i = 0; i < n; i++) {
+        cin >> v[i];
+    }
+
+    ll num2;
+    cin >> num2;
+
+    vector<ll> v2 = v, v3 = v;
+    sort(v2.begin(), v2.end());
+    sort(v3.rbegin(), v3.rend());
+
+    if(n == 1 || v == v2 || v == v3) {
+        cout << "YES" << endl;
+        return;
+    }
+
+    v[0] = min(v[0], num2 - v[0]);
+
+    for(int i = 1; i < n - 1; i++) {
+        bool bol = true;
+
+        if(v[i] < v[i - 1]) {
+            v[i] = max(v[i], num2 - v[i]);
+            bol = false;
+        }
+
+        if((num2 - v[i]) < v[i] && (num2 - v[i]) >= v[i - 1] && bol) {
+            v[i] = min(num2 - v[i], v[i]);
+        }
+    }
+
+    v[n - 1] = max(v[n - 1], num2 - v[n - 1]);
+
+    v2 = v;
+    sort(v2.begin(), v2.end());
+
+    if(v == v2) {
+        cout << "YES" << endl;
+    } else {
+        cout << "NO" << endl;
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int t;
+    cin >> t;
+    
+    while(t--) {
+        solve();
+    }
+    
+    return 0;
+}
