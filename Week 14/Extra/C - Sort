@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define mod 1000000007
+
+void solve() 
+{
+    long long n, q;
+    cin >> n >> q;
+
+    string a, b;
+    cin >> a >> b;
+
+    vector<vector<long long>> freqa(n, vector<long long>(26, 0));
+    vector<vector<long long>> freqb(n, vector<long long>(26, 0));
+
+    for(long long i = 0; i < n; i++) 
+    {
+        if(i != 0) 
+        {
+            freqa[i] = freqa[i - 1];
+            freqb[i] = freqb[i - 1];
+        }
+        freqa[i][a[i] - 'a']++;
+        freqb[i][b[i] - 'a']++;
+    }
+
+    while(q--) 
+    {
+        long long l, r;
+        cin >> l >> r;
+        l--, r--;
+
+        long long ans = 0;
+        for(long long j = 0; j < 26; j++) 
+        {
+            long long curr = freqa[r][j];
+            if(l != 0) 
+            {
+                curr -= freqa[l - 1][j];
+            }
+            long long curr2 = freqb[r][j];
+            if(l != 0) 
+            {
+                curr2 -= freqb[l - 1][j];
+            }
+            ans += abs(curr - curr2);
+        }
+        ans /= 2;
+        cout << ans << endl;
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    long t;
+    cin >> t;
+    while(t--)
+    {
+        solve();
+    }
+
+    return 0;
+}
