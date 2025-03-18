@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void solve()
+{
+    long long n;
+    cin >> n;
+    map<long long, vector<string>> mp;
+
+    for(char a = 'a'; a <= 'z'; a++)
+    {
+        for(char b = 'a'; b <= 'z'; b++)
+        {
+            for(char c = 'a'; c <= 'z'; c++)
+            {
+                long long x = (a - 'a') + (b - 'a') + (c - 'a') + 3;
+                string s = "";
+                s += a;
+                s += b;
+                s += c;
+                mp[x].push_back(s);
+            }
+        }
+    }
+
+    sort(mp[n].begin(), mp[n].end());
+    cout << mp[n][0] << endl;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    long long t = 1;
+    cin >> t;
+    while(t--)
+    {
+        solve();
+    }
+
+    return 0;
+}
