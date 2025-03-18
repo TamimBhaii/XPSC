@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void solve()
+{
+    long long n;
+    cin >> n;
+    string s;
+    cin >> s;
+    long long c = (s[0] == '@');
+
+    for(long long i = 1; i < n; i++)
+    {
+        if(s[i] == s[i - 1] && s[i] == '*')
+        {
+            break;
+        }
+        c += (s[i] == '@');
+    }
+
+    cout << c << endl;
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    
+    long long t;
+    cin >> t;
+
+    while(t--)
+    {
+        solve();
+    }
+
+    return 0;
+}
