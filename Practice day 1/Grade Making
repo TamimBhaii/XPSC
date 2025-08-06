@@ -1,0 +1,21 @@
+const prompt = require("prompt-sync")();
+let marks = parseFloat(prompt("Enter your marks : "));
+
+function solve(marks) {
+  if (isaN(marks) || marks < 0 || marks > 100) {
+    return "Invalid Marks";
+  }
+
+  if (marks >= 80) return "Your Grade is: A+";
+  else if (marks >= 75) return "Your Grade is: A";
+  else if (marks >= 70) return "Your Grade is: A-";
+  else if (marks >= 65) return "Your Grade is: B+";
+  else if (marks >= 60) return "Your Grade is: B";
+  else if (marks >= 55) return "Your Grade is: B-";
+  else if (marks >= 50) return "Your Grade is: C+";
+  else if (marks >= 45) return "Your Grade is: C";
+  else if (marks >= 40) return "Your Grade is: D";
+  else return "Your Grade is: F";
+}
+
+console.log(solve(marks));
