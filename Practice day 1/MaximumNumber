@@ -1,0 +1,2 @@
+var maxNumber = Math.max(...uniqueNumbers);
+console.log("Largest Number:", maxNumber);
